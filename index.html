@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Derick Nelson | Full-Stack Developer & Digital Creative</title>
+    <meta name="description"
+        content="Derick Nelson - Ambitious Full-Stack Developer and Digital Creative based in Nairobi, Kenya. Specializing in web development, graphic design, and video editing.">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        dark: {
+                            900: '#0a0a0a',
+                            800: '#111111',
+                            700: '#1a1a1a',
+                            600: '#262626',
+                        },
+                        accent: {
+                            cyan: '#00d4ff',
+                            blue: '#3b82f6',
+                            gold: '#fbbf24',
+                        }
+                    },
+                    animation: {
+                        'gradient': 'gradient 8s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin-slow': 'spin 20s linear infinite',
+                    },
+                    keyframes: {
+                        gradient: {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #262626;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00d4ff;
+        }
+
+        /* Glassmorphism Utilities */
+        .glass {
+            background: rgba(26, 26, 26, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-strong {
+            background: rgba(17, 17, 17, 0.7);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Text Gradient */
+        .text-gradient {
+            background: linear-gradient(135deg, #00d4ff 0%, #3b82f6 50%, #fbbf24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Glow Effects */
+        .glow-cyan {
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.3);
+        }
+
+        .glow-text {
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+        }
+
+        /* Animated Background Mesh */
+        .mesh-gradient {
+            background:
+                radial-gradient(at 40% 20%, rgba(0, 212, 255, 0.15) 0px, transparent 50%),
+                radial-gradient(at 80% 0%, rgba(59, 130, 246, 0.1) 0px, transparent 50%),
+                radial-gradient(at 0% 50%, rgba(251, 191, 36, 0.05) 0px, transparent 50%),
+                radial-gradient(at 80% 50%, rgba(0, 212, 255, 0.1) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(59, 130, 246, 0.1) 0px, transparent 50%),
+                #0a0a0a;
+            background-size: 200% 200%;
+            animation: gradient 15s ease infinite;
+        }
+
+        /* Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Cursor Effect */
+        .cursor-glow {
+            pointer-events: none;
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            transition: opacity 0.3s;
+        }
+
+        /* Project Card Hover */
+        .project-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+        }
+
+        /* Skill Progress */
+        .skill-bar {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #00d4ff, #3b82f6);
+            width: 0;
+            transition: width 1.5s ease-out;
+        }
+
+        /* Typewriter Cursor */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-start infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Navigation Blur */
+        .nav-blur {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-dark-900 text-white font-sans antialiased overflow-x-hidden selection:bg-accent-cyan selection:text-dark-900">
+
+    <!-- Cursor Glow Effect -->
+    <div class="cursor-glow hidden md:block" id="cursorGlow"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur border-b border-white/10 transition-all duration-300"
+        id="navbar">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="font-display font-bold text-2xl tracking-tighter">
+                        <span class="text-white">DERICK</span><span class="text-accent-cyan">.</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#about"
+                            class="hover:text-accent-cyan transition-colors duration-300 text-sm font-medium tracking-wide">About</a>
+                        <a href="#skills"
+                            class="hover:text-accent-cyan transition-colors duration-300 text-sm font-medium tracking-wide">Skills</a>
+                        <a href="#portfolio"
+                            class="hover:text-accent-cyan transition-colors duration-300 text-sm font-medium tracking-wide">Portfolio</a>
+                        <a href="#contact"
+                            class="px-6 py-2.5 rounded-full glass-strong text-accent-cyan hover:bg-accent-cyan hover:text-dark-900 transition-all duration-300 text-sm font-medium">Let's
+                            Talk</a>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobileMenuBtn" class="text-white hover:text-accent-cyan focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobileMenu" class="hidden md:hidden glass-strong border-t border-white/10">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#about"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:text-accent-cyan hover:bg-white/5">About</a>
+                <a href="#skills"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:text-accent-cyan hover:bg-white/5">Skills</a>
+                <a href="#portfolio"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:text-accent-cyan hover:bg-white/5">Portfolio</a>
+                <a href="#contact"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-accent-cyan hover:bg-white/5">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center mesh-gradient overflow-hidden pt-20">
+        <!-- Animated Background Elements -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-20 left-10 w-72 h-72 bg-accent-cyan/20 rounded-full blur-3xl animate-float"></div>
+            <div class="absolute bottom-20 right-10 w-96 h-96 bg-accent-blue/20 rounded-full blur-3xl animate-float"
+                style="animation-delay: 2s;"></div>
+            <div
+                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-radial from-transparent via-transparent to-dark-900/80">
+            </div>
+        </div>
+
+        <div
+            class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-32 grid lg:grid-cols-2 gap-12 items-center">
+            <!-- Content -->
+            <div class="order-2 lg:order-1 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-6 reveal">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    <span class="text-sm font-medium text-gray-300">Available for Projects</span>
+                </div>
+
+                <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 reveal"
+                    style="transition-delay: 100ms;">
+                    Hi, I'm <span class="text-gradient">Derick</span><br>
+                    <span class="typing-cursor text-white" id="typingText">Full-Stack Developer</span>
+                </h1>
+
+                <p class="text-lg md:text-xl text-gray-400 mb-8 max-w-xl mx-auto lg:mx-0 reveal"
+                    style="transition-delay: 200ms;">
+                    Ambitious Information Technology student crafting digital experiences at the intersection of code
+                    and creativity. Based in <span class="text-accent-cyan font-medium">Nairobi, Kenya</span>.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start reveal"
+                    style="transition-delay: 300ms;">
+                    <a href="#portfolio"
+                        class="px-8 py-4 rounded-full bg-accent-cyan text-dark-900 font-semibold hover:bg-white transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 group">
+                        View My Work
+                        <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <a href="#contact"
+                        class="px-8 py-4 rounded-full glass-strong text-white font-semibold hover:border-accent-cyan/50 transition-all duration-300 flex items-center justify-center">
+                        Get In Touch
+                    </a>
+                </div>
+
+                <!-- Stats -->
+                <div class="mt-12 grid grid-cols-3 gap-6 max-w-md mx-auto lg:mx-0 reveal"
+                    style="transition-delay: 400ms;">
+                    <div class="text-center lg:text-left">
+                        <div class="text-3xl font-display font-bold text-white">3+</div>
+                        <div class="text-sm text-gray-500 mt-1">Years Experience</div>
+                    </div>
+                    <div class="text-center lg:text-left border-l border-white/10 lg:border-l-0">
+                        <div class="text-3xl font-display font-bold text-white">20+</div>
+                        <div class="text-sm text-gray-500 mt-1">Projects Done</div>
+                    </div>
+                    <div class="text-center lg:text-left border-l border-white/10 lg:border-l-0">
+                        <div class="text-3xl font-display font-bold text-white">15+</div>
+                        <div class="text-sm text-gray-500 mt-1">Happy Clients</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Portrait -->
+            <div class="order-1 lg:order-2 flex justify-center reveal" style="transition-delay: 200ms;">
+                <div class="relative">
+                    <!-- Glow Ring -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-tr from-accent-cyan to-accent-blue rounded-full blur-2xl opacity-30 animate-pulse-slow">
+                    </div>
+
+                    <!-- Glass Frame -->
+                    <div
+                        class="relative glass-strong rounded-3xl p-3 glow-cyan transform rotate-3 hover:rotate-0 transition-transform duration-500">
+                        <div class="relative overflow-hidden rounded-2xl aspect-[3/4] w-72 md:w-80 lg:w-96">
+                            <img src="Images/derick.png" alt="Derick Nelson"
+                                class="object-cover w-full h-full transform hover:scale-110 transition-transform duration-700">
+
+                            <!-- Overlay Info -->
+                            <div
+                                class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-3 h-3 rounded-full bg-accent-cyan animate-pulse"></div>
+                                    <span class="text-sm font-medium">Creative Technologist</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Floating Badge -->
+                    <div class="absolute -bottom-6 -right-6 glass-card px-4 py-3 rounded-2xl animate-float"
+                        style="animation-delay: 1s;">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-accent-blue/20 flex items-center justify-center">
+                                <i data-lucide="code-2" class="w-5 h-5 text-accent-cyan"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400">Specialization</div>
+                                <div class="text-sm font-semibold">Full-Stack</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i data-lucide="chevron-down" class="w-6 h-6 text-gray-500"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="relative py-24 lg:py-32 bg-dark-900">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- Image Grid -->
+                <div class="relative reveal">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-4 mt-8">
+                            <div class="glass-card rounded-2xl overflow-hidden aspect-square">
+                                <img src="http://static.photos/technology/320x240/101" alt="Tech workspace"
+                                    class="object-cover w-full h-full hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <div class="glass-card rounded-2xl overflow-hidden aspect-[4/3]">
+                                <img src="http://static.photos/workspace/320x240/202" alt="Creative workspace"
+                                    class="object-cover w-full h-full hover:scale-110 transition-transform duration-500">
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="glass-card rounded-2xl overflow-hidden aspect-[4/3]">
+                                <img src="http://static.photos/office/320x240/303" alt="Office"
+                                    class="object-cover w-full h-full hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <div class="glass-card rounded-2xl overflow-hidden aspect-square relative">
+                                <img src="http://static.photos/nature/320x240/404" alt="Inspiration"
+                                    class="object-cover w-full h-full hover:scale-110 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-accent-cyan/10 flex items-center justify-center">
+                                    <div class="glass-strong px-4 py-2 rounded-full text-xs font-semibold">Nairobi, KE
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Experience Badge -->
+                    <div
+                        class="absolute -bottom-6 -right-6 glass-strong px-6 py-4 rounded-2xl border border-accent-cyan/30">
+                        <div class="text-3xl font-display font-bold text-accent-cyan">IT</div>
+                        <div class="text-sm text-gray-400">Student & Developer</div>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="reveal">
+                    <div
+                        class="inline-block px-4 py-1.5 rounded-full glass-card text-accent-cyan text-sm font-medium mb-6">
+                        About Me
+                    </div>
+
+                    <h2 class="font-display text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                        Bridging <span class="text-gradient">Technology</span> & <span
+                            class="text-accent-gold">Creativity</span>
+                    </h2>
+
+                    <p class="text-gray-400 text-lg leading-relaxed mb-6">
+                        I'm Derick Nelson, an ambitious Information Technology student based in the vibrant city of
+                        Nairobi, Kenya. My passion lies at the intersection of robust code and compelling visual
+                        storytelling.
+                    </p>
+
+                    <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                        As a Full-Stack Developer, I architect scalable digital solutions. As a Digital Creative, I
+                        craft immersive experiences through graphic design and cinematic video editing. I don't just
+                        build websites; I create digital ecosystems that leave lasting impressions.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-4 mb-8">
+                        <div class="glass-card p-4 rounded-xl">
+                            <i data-lucide="palette" class="w-6 h-6 text-accent-cyan mb-2"></i>
+                            <div class="font-semibold">Graphic Design</div>
+                            <div class="text-sm text-gray-500">Visual Identity</div>
+                        </div>
+                        <div class="glass-card p-4 rounded-xl">
+                            <i data-lucide="video" class="w-6 h-6 text-accent-gold mb-2"></i>
+                            <div class="font-semibold">Video Editing</div>
+                            <div class="text-sm text-gray-500">Motion & Story</div>
+                        </div>
+                        <div class="glass-card p-4 rounded-xl">
+                            <i data-lucide="code" class="w-6 h-6 text-accent-blue mb-2"></i>
+                            <div class="font-semibold">Full-Stack Dev</div>
+                            <div class="text-sm text-gray-500">Web & Mobile</div>
+                        </div>
+                        <div class="glass-card p-4 rounded-xl">
+                            <i data-lucide="lightbulb" class="w-6 h-6 text-purple-400 mb-2"></i>
+                            <div class="font-semibold">Innovation</div>
+                            <div class="text-sm text-gray-500">Problem Solving</div>
+                        </div>
+                    </div>
+
+                    <a href="resume/MY pro Resume.pdf"
+                        class="inline-flex items-center gap-2 text-accent-cyan hover:text-white transition-colors font-semibold group">
+                        Download Resume
+                        <i data-lucide="download" class="w-5 h-5 group-hover:translate-y-1 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="relative py-24 lg:py-32 bg-dark-800">
+        <!-- Background Accent -->
+        <div
+            class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-accent-cyan/5 to-transparent pointer-events-none">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <div class="inline-block px-4 py-1.5 rounded-full glass-card text-accent-cyan text-sm font-medium mb-6">
+                    Expertise
+                </div>
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">
+                    Technical <span class="text-gradient">Mastery</span> & Creative Tools
+                </h2>
+                <p class="text-gray-400 text-lg">
+                    A diverse skill set spanning modern web technologies, creative design software, and professional
+                    video production tools.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Development -->
+                <div
+                    class="glass-card rounded-3xl p-8 reveal group hover:border-accent-cyan/50 transition-all duration-300">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-accent-cyan/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="terminal" class="w-7 h-7 text-accent-cyan"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold mb-4">Development</h3>
+                    <ul class="space-y-4">
+                        <li class="skill-item">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">JavaScript/TypeScript</span>
+                                <span class="text-accent-cyan text-sm">90%</span>
+                            </div>
+                            <div class="h-1.5 bg-dark-600 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full rounded-full" data-width="90"></div>
+                            </div>
+                        </li>
+                        <li class="skill-item">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">React & Next.js</span>
+                                <span class="text-accent-cyan text-sm">85%</span>
+                            </div>
+                            <div class="h-1.5 bg-dark-600 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full rounded-full" data-width="85"></div>
+                            </div>
+                        </li>
+                        <li class="skill-item">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">Node.js & Python</span>
+                                <span class="text-accent-cyan text-sm">80%</span>
+                            </div>
+                            <div class="h-1.5 bg-dark-600 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full rounded-full" data-width="80"></div>
+                            </div>
+                        </li>
+                        <li class="skill-item">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">Database & APIs</span>
+                                <span class="text-accent-cyan text-sm">85%</span>
+                            </div>
+                            <div class="h-1.5 bg-dark-600 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full rounded-full" data-width="85"></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Design -->
+                <div class="glass-card rounded-3xl p-8 reveal group hover:border-accent-gold/50 transition-all duration-300"
+                    style="transition-delay: 100ms;">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-accent-gold/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="pen-tool" class="w-7 h-7 text-accent-gold"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold mb-4">Graphic Design</h3>
+                    <ul class="space-y-4">
+                        <li class="skill-item">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">Adobe Photoshop</span>
+                                <span class="text-accent-gold text-sm">95%</span>
+                            </div>
+                            <div class="h-1.5 bg-dark-600 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full rounded-full bg-gradient-to-r from-accent-gold to-yellow-600"
+                                    data-width="95"></div>
+                            </div>
+                        </li>
+                        <li class="skill-item">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">Adobe Illustrator</span>
+                                <span class="text-accent-gold text-sm">88%</span>
+                            </div>
+                            <div class="h-1.5 bg-dark-600 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full rounded-full bg-gradient-to-r from-accent-gold to-yellow-600"
+                                    data-width="88"></div>
+                            </div>
+                        </li>
+                        <li class="skill-item">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">Figma & UI/UX</span>
+                                <span class="text-accent-gold text-sm">90%</span>
+                            </div>
+                            <div class="h-1.5 bg-dark-600 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full rounded-full bg-gradient-to-r from-accent-gold to-yellow-600"
+                                    data-width="90"></div>
+                            </div>
+                        </li>
+                        <li class="skill-item">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">Brand Identity</span>
+                                <span class="text-accent-gold text-sm">85%</span>
+                            </div>
+                            <div class="h-1.5 bg-dark-600 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full rounded-full bg-gradient-to-r from-accent-gold to-yellow-600"
+                                    data-width="85"></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Video -->
+                <div class="glass-card rounded-3xl p-8 reveal group hover:border-purple-500/50 transition-all duration-300"
+                    style="transition-delay: 200ms;">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-purple-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="film" class="w-7 h-7 text-purple-400"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold mb-4">Video Editing</h3>
+                    <ul class="space-y-4">
+                        <li class="skill-item">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">Adobe Premiere Pro</span>
+                                <span class="text-purple-400 text-sm">92%</span>
+                            </div>
+                            <div class="h-1.5 bg-dark-600 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full rounded-full bg-gradient-to-r from-purple-400 to-purple-600"
+                                    data-width="92"></div>
+                            </div>
+                        </li>
+                        <li class="skill-item">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">After Effects</span>
+                                <span class="text-purple-400 text-sm">78%</span>
+                            </div>
+                            <div class="h-1.5 bg-dark-600 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full rounded-full bg-gradient-to-r from-purple-400 to-purple-600"
+                                    data-width="78"></div>
+                            </div>
+                        </li>
+                        <li class="skill-item">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">DaVinci Resolve</span>
+                                <span class="text-purple-400 text-sm">85%</span>
+                            </div>
+                            <div class="h-1.5 bg-dark-600 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full rounded-full bg-gradient-to-r from-purple-400 to-purple-600"
+                                    data-width="85"></div>
+                            </div>
+                        </li>
+                        <li class="skill-item">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">Color Grading</span>
+                                <span class="text-purple-400 text-sm">80%</span>
+                            </div>
+                            <div class="h-1.5 bg-dark-600 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full rounded-full bg-gradient-to-r from-purple-400 to-purple-600"
+                                    data-width="80"></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="relative py-24 lg:py-32 bg-dark-900">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 reveal">
+                <div class="max-w-2xl">
+                    <div
+                        class="inline-block px-4 py-1.5 rounded-full glass-card text-accent-cyan text-sm font-medium mb-6">
+                        Portfolio
+                    </div>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">
+                        Featured <span class="text-gradient">Projects</span>
+                    </h2>
+                    <p class="text-gray-400 text-lg">
+                        A curated selection of my best work across web development, brand design, and video production.
+                    </p>
+                </div>
+
+                <!-- Filter Buttons -->
+                <div class="flex gap-2 mt-6 md:mt-0 overflow-x-auto pb-2 md:pb-0">
+                    <button
+                        class="filter-btn active px-6 py-2 rounded-full glass-card text-sm font-medium hover:bg-accent-cyan hover:text-dark-900 transition-all whitespace-nowrap"
+                        data-filter="all">All Work</button>
+                    <button
+                        class="filter-btn px-6 py-2 rounded-full glass-card text-sm font-medium hover:bg-accent-cyan hover:text-dark-900 transition-all whitespace-nowrap"
+                        data-filter="web">Web Dev</button>
+                    <button
+                        class="filter-btn px-6 py-2 rounded-full glass-card text-sm font-medium hover:bg-accent-cyan hover:text-dark-900 transition-all whitespace-nowrap"
+                        data-filter="design">Design</button>
+                    <button
+                        class="filter-btn px-6 py-2 rounded-full glass-card text-sm font-medium hover:bg-accent-cyan hover:text-dark-900 transition-all whitespace-nowrap"
+                        data-filter="video">Video</button>
+                </div>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid">
+                <!-- Project 1 -->
+                <div class="project-card glass-card rounded-3xl overflow-hidden reveal group" data-category="web">
+                    <div class="relative aspect-[4/3] overflow-hidden">
+                        <img src="http://static.photos/technology/640x360/501" alt="E-Commerce Platform"
+                            class="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-700">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-dark-900 via-transparent to-transparent opacity-60">
+                        </div>
+                        <div
+                            class="absolute top-4 right-4 px-3 py-1 rounded-full bg-accent-cyan/20 text-accent-cyan text-xs font-semibold backdrop-blur-sm">
+                            Web Development
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-xl font-bold mb-2 group-hover:text-accent-cyan transition-colors">
+                            Nairobi E-Commerce Platform</h3>
+                        <p class="text-gray-400 text-sm mb-4">Full-stack marketplace built with Next.js, Node.js, and
+                            MongoDB. Features real-time inventory and M-Pesa integration.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full bg-dark-700 text-xs text-gray-300">Next.js</span>
+                            <span class="px-3 py-1 rounded-full bg-dark-700 text-xs text-gray-300">Node.js</span>
+                            <span class="px-3 py-1 rounded-full bg-dark-700 text-xs text-gray-300">MongoDB</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card glass-card rounded-3xl overflow-hidden reveal group" data-category="design"
+                    style="transition-delay: 100ms;">
+                    <div class="relative aspect-[4/3] overflow-hidden">
+                        <img src="http://static.photos/minimal/640x360/602" alt="Brand Identity"
+                            class="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-700">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-dark-900 via-transparent to-transparent opacity-60">
+                        </div>
+                        <div
+                            class="absolute top-4 right-4 px-3 py-1 rounded-full bg-accent-gold/20 text-accent-gold text-xs font-semibold backdrop-blur-sm">
+                            Brand Design
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-xl font-bold mb-2 group-hover:text-accent-gold transition-colors">
+                            Savanna Tech Identity</h3>
+                        <p class="text-gray-400 text-sm mb-4">Complete brand identity system for a Kenyan tech startup
+                            including logo, color palette, and marketing collateral.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full bg-dark-700 text-xs text-gray-300">Illustrator</span>
+                            <span class="px-3 py-1 rounded-full bg-dark-700 text-xs text-gray-300">Branding</span>
+                            <span class="px-3 py-1 rounded-full bg-dark-700 text-xs text-gray-300">Print</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card glass-card rounded-3xl overflow-hidden reveal group" data-category="video"
+                    style="transition-delay: 200ms;">
+                    <div class="relative aspect-[4/3] overflow-hidden">
+                        <img src="http://static.photos/cityscape/640x360/703" alt="Documentary"
+                            class="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-700">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-dark-900 via-transparent to-transparent opacity-60">
+                        </div>
+                        <div
+                            class="absolute top-4 right-4 px-3 py-1 rounded-full bg-purple-500/20 text-purple-400 text-xs font-semibold backdrop-blur-sm">
+                            Video Production
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-xl font-bold mb-2 group-hover:text-purple-400 transition-colors">
+                            Nairobi Nights Documentary</h3>
+                        <p class="text-gray-400 text-sm mb-4">Cinematic short film showcasing Nairobi's vibrant
+                            nightlife and tech scene. Color graded and edited in DaVinci Resolve.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full bg-dark-700 text-xs text-gray-300">Premiere Pro</span>
+                            <span class="px-3 py-1 rounded-full bg-dark-700 text-xs text-gray-300">Color Grading</span>
+                            <span class="px-3 py-1 rounded-full bg-dark-700 text-xs text-gray-300">Documentary</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card glass-card rounded-3xl overflow-hidden reveal group" data-category="web"
+                    style="transition-delay: 100ms;">
+                    <div class="relative aspect-[4/3] overflow-hidden">
+                        <img src="http://static.photos/abstract/640x360/804" alt="Dashboard"
+                            class="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-700">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-dark-900 via-transparent to-transparent opacity-60">
+                        </div>
+                        <div
+                            class="absolute top-4 right-4 px-3 py-1 rounded-full bg-accent-cyan/20 text-accent-cyan text-xs font-semibold backdrop-blur-sm">
+                            Web App
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-xl font-bold mb-2 group-hover:text-accent-cyan transition-colors">
+                            Analytics Dashboard</h3>
+                        <p class="text-gray-400 text-sm mb-4">Real-time data visualization platform with interactive
+                            charts, dark mode UI, and exportable reports.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full bg-dark-700 text-xs text-gray-300">React</span>
+                            <span class="px-3 py-1 rounded-full bg-dark-700 text-xs text-gray-300">D3.js</span>
+                            <span class="px-3 py-1 rounded-full bg-dark-700 text-xs text-gray-300">Firebase</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card glass-card rounded-3xl overflow-hidden reveal group" data-category="design"
+                    style="transition-delay: 200ms;">
+                    <div class="relative aspect-[4/3] overflow-hidden">
+                        <img src="http://static.photos/food/640x360/905" alt="Restaurant Branding"
+                            class="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-700">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-dark-900 via-transparent to-transparent opacity-60">
+                        </div>
+                        <div
+                            class="absolute top-4 right-4 px-3 py-1 rounded-full bg-accent-gold/20 text-accent-gold text-xs font-semibold backdrop-blur-sm">
+                            Visual Design
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-xl font-bold mb-2 group-hover:text-accent-gold transition-colors">
+                            Urban Eats Campaign</h3>
+                        <p class="text-gray-400 text-sm mb-4">Social media campaign and menu design for a trendy Nairobi
+                            restaurant chain. Photography and layout design.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full bg-dark-700 text-xs text-gray-300">Photoshop</span>
+                            <span class="px-3 py-1 rounded-full bg-dark-700 text-xs text-gray-300">InDesign</span>
+                            <span class="px-3 py-1 rounded-full bg-dark-700 text-xs text-gray-300">Social Media</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card glass-card rounded-3xl overflow-hidden reveal group" data-category="video"
+                    style="transition-delay: 300ms;">
+                    <div class="relative aspect-[4/3] overflow-hidden">
+                        <img src="http://static.photos/event/640x360/106" alt="Event Coverage"
+                            class="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-700">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-dark-900 via-transparent to-transparent opacity-60">
+                        </div>
+                        <div
+                            class="absolute top-4 right-4 px-3 py-1 rounded-full bg-purple-500/20 text-purple-400 text-xs font-semibold backdrop-blur-sm">
+                            Event Video
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-xl font-bold mb-2 group-hover:text-purple-400 transition-colors">
+                            Tech Summit 2024</h3>
+                        <p class="text-gray-400 text-sm mb-4">Highlights reel and speaker interviews from East Africa's
+                            largest technology conference. Multi-camera setup.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full bg-dark-700 text-xs text-gray-300">Multi-cam</span>
+                            <span class="px-3 py-1 rounded-full bg-dark-700 text-xs text-gray-300">After Effects</span>
+                            <span class="px-3 py-1 rounded-full bg-dark-700 text-xs text-gray-300">Motion
+                                Graphics</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View More -->
+            <div class="text-center mt-12 reveal">
+                <a href="#"
+                    class="inline-flex items-center gap-2 px-8 py-4 rounded-full glass-strong text-white font-semibold hover:border-accent-cyan/50 transition-all duration-300 group">
+                    View All Projects
+                    <i data-lucide="arrow-up-right"
+                        class="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="relative py-24 lg:py-32 bg-dark-800 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-accent-cyan/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-accent-blue/10 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <!-- Contact Info -->
+                <div class="reveal">
+                    <div
+                        class="inline-block px-4 py-1.5 rounded-full glass-card text-accent-cyan text-sm font-medium mb-6">
+                        Get In Touch
+                    </div>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                        Let's Create Something <span class="text-gradient">Amazing</span> Together
+                    </h2>
+                    <p class="text-gray-400 text-lg mb-8">
+                        Have a project in mind? I'm always open to discussing new opportunities, creative ideas, or
+                        potential collaborations.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4 group">
+                            <div
+                                class="w-14 h-14 rounded-2xl glass-card flex items-center justify-center group-hover:border-accent-cyan/50 transition-all">
+                                <i data-lucide="mail" class="w-6 h-6 text-accent-cyan"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500 mb-1">Email</div>
+                                <a href="mailto:mayorederick@gmail.com"
+                                    class="text-lg font-medium hover:text-accent-cyan transition-colors">mayorederick@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 group">
+                            <div
+                                class="w-14 h-14 rounded-2xl glass-card flex items-center justify-center group-hover:border-accent-cyan/50 transition-all">
+                                <i data-lucide="map-pin" class="w-6 h-6 text-accent-cyan"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500 mb-1">Location</div>
+                                <span class="text-lg font-medium">Nairobi, Kenya</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 group">
+                            <div
+                                class="w-14 h-14 rounded-2xl glass-card flex items-center justify-center group-hover:border-accent-cyan/50 transition-all">
+                                <i data-lucide="briefcase" class="w-6 h-6 text-accent-cyan"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500 mb-1">Availability</div>
+                                <span class="text-lg font-medium text-green-400">Open for Freelance</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="mt-12">
+                        <div class="text-sm text-gray-500 mb-4">Follow Me</div>
+                        <div class="flex gap-4">
+                            <a href="https://github.com/Derrick-nel"
+                                class="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-accent-cyan hover:text-dark-900 transition-all duration-300 group">
+                                <i data-lucide="github" class="w-5 h-5"></i>
+                            </a>
+                            <a href="#"
+                                class="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-accent-cyan hover:text-dark-900 transition-all duration-300 group">
+                                <i data-lucide="linkedin" class="w-5 h-5"></i>
+                            </a>
+                            <a href="https://x.com/Nelsonderic"
+                                class="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-accent-cyan hover:text-dark-900 transition-all duration-300 group">
+                                <i data-lucide="twitter" class="w-5 h-5"></i>
+                            </a>
+                            <a href="https://www.instagram.com/thatguyderrick._/"
+                                class="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-accent-cyan hover:text-dark-900 transition-all duration-300 group">
+                                <i data-lucide="instagram" class="w-5 h-5"></i>
+                            </a>
+                            <a href="#"
+                                class="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-accent-cyan hover:text-dark-900 transition-all duration-300 group">
+                                <i data-lucide="dribbble" class="w-5 h-5"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="reveal" style="transition-delay: 200ms;">
+                    <form class="glass-strong rounded-3xl p-8 lg:p-10 border border-white/10" id="contactForm">
+                        <div class="space-y-6">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-400 mb-2">Name</label>
+                                    <input type="text"
+                                        class="w-full px-4 py-3 rounded-xl bg-dark-700 border border-white/10 focus:border-accent-cyan focus:outline-none focus:ring-2 focus:ring-accent-cyan/20 transition-all text-white placeholder-gray-500"
+                                        placeholder="John Doe">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-400 mb-2">Email</label>
+                                    <input type="email"
+                                        class="w-full px-4 py-3 rounded-xl bg-dark-700 border border-white/10 focus:border-accent-cyan focus:outline-none focus:ring-2 focus:ring-accent-cyan/20 transition-all text-white placeholder-gray-500"
+                                        placeholder="john@example.com">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-2">Subject</label>
+                                <select
+                                    class="w-full px-4 py-3 rounded-xl bg-dark-700 border border-white/10 focus:border-accent-cyan focus:outline-none focus:ring-2 focus:ring-accent-cyan/20 transition-all text-white">
+                                    <option value="">Select a service</option>
+                                    <option value="web">Web Development</option>
+                                    <option value="design">Graphic Design</option>
+                                    <option value="video">Video Editing</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-2">Message</label>
+                                <textarea rows="5"
+                                    class="w-full px-4 py-3 rounded-xl bg-dark-700 border border-white/10 focus:border-accent-cyan focus:outline-none focus:ring-2 focus:ring-accent-cyan/20 transition-all text-white placeholder-gray-500 resize-none"
+                                    placeholder="Tell me about your project..."></textarea>
+                            </div>
+
+                            <button type="submit"
+                                class="w-full px-8 py-4 rounded-xl bg-gradient-to-r from-accent-cyan to-accent-blue text-dark-900 font-bold text-lg hover:opacity-90 transition-all duration-300 transform hover:scale-[1.02] flex items-center justify-center gap-2 group">
+                                Send Message
+                                <i data-lucide="send"
+                                    class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative bg-dark-900 border-t border-white/10 py-12">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-2">
+                    <span class="font-display font-bold text-2xl tracking-tighter">
+                        <span class="text-white">DERICK</span><span class="text-accent-cyan">.</span>
+                    </span>
+                </div>
+
+                <div class="text-gray-500 text-sm text-center md:text-left">
+                    &copy; 2024 Derick Nelson. All rights reserved. Crafted with passion in Nairobi, Kenya.
+                </div>
+
+                <div class="flex gap-6">
+                    <a href="#" class="text-gray-500 hover:text-accent-cyan transition-colors text-sm">Privacy</a>
+                    <a href="#" class="text-gray-500 hover:text-accent-cyan transition-colors text-sm">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+
+    <!-- Main Script -->
+    <script src="script.js"></script>
+</body>
+
+</html>
